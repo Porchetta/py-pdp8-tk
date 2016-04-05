@@ -87,8 +87,8 @@ Nei manuali ufficiali, il registro di estensione **E** (chiamato **LINK**) dopo 
   * CIL = 0111 0000 0100 0000 -> Sposta verso sinistra i bit in E-AC
   * INC = 0111 0000 0010 0000 -> Incrementa di 1 il contenuto di AC
   * SPA = 0111 0000 0001 0000 -> Salta l'istruzione successiva se AC > 0
-  * SZA = 0111 0000 0000 1000 -> Salta l'istruzione successiva se AC = 0
-  * SNA = 0111 0000 0000 0100 -> Salta l'istruzione successiva se AC < 0
+  * SNA = 0111 0000 0000 1000 -> Salta l'istruzione successiva se AC = 0
+  * SZA = 0111 0000 0000 0100 -> Salta l'istruzione successiva se AC < 0
   * SZE = 0111 0000 0000 0010 -> Salta l'istruzione successiva se E = 0
   * HLT = 0111 0000 0000 0001 -> Arresta il sistema
 
