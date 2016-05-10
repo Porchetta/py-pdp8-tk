@@ -69,7 +69,7 @@ Presentano sempre la configurazione 1111 nei bit dall'uno al 4.
   * LDA = 010 -> Carica in AC il contenuto della cella indirizzata
   * STA = 011 -> Salva nella cella indirizzata il contenuto di AC
   * BUN = 100 -> Salto incondizionato alla cella indirizzata
-  * BSA = 101 -> Salvataggio del PC nella cella indirizzata e salto alla cella successiva a         quella indirizzata
+  * BSA = 101 -> Salvataggio del PC nella cella indirizzata e salto alla cella successiva a quella indirizzata
   * ISZ = 110 -> Incrementa di 1 il contenuto della cella indirizzata e se uguale a 0, salta l'istruzione successiva
 
 **NOTA _ADD_** : Il registro **E** viene utilizzato come un **FLAG** che _segnala un eventuale riporto nell'operazione corrente_ (quindi l'ultima addizione eseguita e non quelle precedenti).
@@ -87,8 +87,8 @@ Nei manuali ufficiali, il registro di estensione **E** (chiamato **LINK**) dopo 
   * CIL = 0111 0000 0100 0000 -> Sposta verso sinistra i bit in E-AC
   * INC = 0111 0000 0010 0000 -> Incrementa di 1 il contenuto di AC
   * SPA = 0111 0000 0001 0000 -> Salta l'istruzione successiva se AC > 0
-  * SNA = 0111 0000 0000 1000 -> Salta l'istruzione successiva se AC = 0
-  * SZA = 0111 0000 0000 0100 -> Salta l'istruzione successiva se AC < 0
+  * SNA = 0111 0000 0000 1000 -> Salta l'istruzione successiva se AC < 0
+  * SZA = 0111 0000 0000 0100 -> Salta l'istruzione successiva se AC = 0
   * SZE = 0111 0000 0000 0010 -> Salta l'istruzione successiva se E = 0
   * HLT = 0111 0000 0000 0001 -> Arresta il sistema
 
@@ -108,3 +108,18 @@ Nei manuali ufficiali, il registro di estensione **E** (chiamato **LINK**) dopo 
 **NOTA LABELS** = L'emulatore non da particolari restrinzioni riguardo al nome dell'indirizzo. Di norma consiste in una parola di non più _3_ caratteri alfanumerici con il primo carattere necessariamente alfabetico. Si consiglia di seguire questa convenzione.
 
 **NOTA Generale** = Tutti gli indirizzi sono indicati in esadecimale (**HEX**), non in decimale (DEC).
+
+### Ciclo di esecuzione
+
+Sono coinvolti 4 fasi per un ciclo completo, ma non tutti sono indispensabili per concludere il ciclo:
+
+  * FETCH (lettura dell'istruzione corrente)
+  * INDIRECT (risoluzione di un indirizzamento indiretto)
+  * EXECUTION (esecuzione dell'istruzione)
+  * INTERRUPT (esecuzione di un'istruzione di interrupt)
+
+Ognuna di queste fasi ha a disposizione 4 clock per il completamento (il clock inizia da 0). Tutte le possibili ramificazioni di questo ciclo sono le seguenti:
+
+  * `FETCH -> EXECUTION`: istruzioni di memoria o registro
+  * `FETCH -> INDIRECT -> EXECUTION`: solo istruzioni di memoria
+  * `FETCH -> INTERRUPT`: istruzioni di interruzione
